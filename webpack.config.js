@@ -5,11 +5,11 @@ module.exports = {
   mode: "development",
   entry: "./src/js/index.js",
   devServer: {
-    static: "./dist",
+    static: "./docs",
   },
   output: {
-    filename: "main.js",
-    path: path.resolve(__dirname, "dist"),
+    filename: "js/main.js",
+    path: path.resolve(__dirname, "docs"),
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -17,5 +17,5 @@ module.exports = {
       template: "src/index.html",
     }),
   ],
-  entry: ["@babel/polyfill", "./app/js"],
+  entry: ["@babel/polyfill", "./src/js/index.js"],
 };
