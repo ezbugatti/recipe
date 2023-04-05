@@ -1,6 +1,6 @@
 require("@babel/polyfill");
 import Search from "./model/Search";
-import { elements } from "./view/base";
+import { elements, renderLoader, clearLoader } from "./view/base";
 import * as searchView from "./view/searchView";
 
 // web app tolov
@@ -19,13 +19,17 @@ const controlSearch = async () => {
       // 2. Шинэ хайлтын объектийг үүсгэж өгн
       state.search = new Search(query);
       // 3. Хайлт хийхэд зориулж дэлгэцийг бэлтгэнэ
+      searchView.clearSearch();
+      searchView.clearSearchResult();
+      renderLoader(elements.searchResultDiv);
       // 4. Хайлтыг гүйцэтгэнэ
       await state.search.doSearch();
       // 5. Хайлтын үр дүн дэлгэцэнд үзүүлнэ.
+      clearLoader();
       searchView.renderRecipes(state.search.result);
     }
   } catch (error) {
-    alert(error);
+    alert("Хайлт илэрцгүй..");
   }
 };
 elements.searchForm.addEventListener("submit", (e) => {
